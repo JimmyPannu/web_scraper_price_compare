@@ -16,11 +16,6 @@ const productList = document.querySelector('.productList');
 const productImg = document.querySelector('.product-img')
 
 
-
-// axios.get("http://localhost:8080/api/products").then(res => {
-//     console.log(res.data.data[0])
-// })
-
 var HNurlAr = []
 var HNimgAr = []
 //make a request from the frontend to the scraper api
@@ -50,7 +45,7 @@ function scraperSearch(event) {
 
 function scraperProduct(event) {
     event.preventDefault()
-    
+    list.style.display="none";
     let searchTerm = event.target.textContent
     axios
         .get("/api/scraper/search", { params: {keyword: searchTerm }})
@@ -65,10 +60,13 @@ function scraperProduct(event) {
                         jb.textContent = `name: ${res.data.data.jb.name}, price at JBHIFI: ${res.data.data.jb.price}` 
                         hn.textContent = `name: ${res.data.data.hn.name}, price at Harvey Norman: ${res.data.data.hn.price}` 
                         productImg.src = HNimgAr[event.target.dataset.indexNumber]
+                        
                     }
                 )}
         )
 }
 
 submitBtn.addEventListener('click', scraperSearch)
+
+
 
